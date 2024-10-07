@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// src/App.tsx
+
+import React, { useEffect, useState } from 'react';
+import Confetti from 'react-confetti';
 
 function App() {
+  const [showConfetti, setShowConfetti] = useState(true);
+
+  useEffect(() => {
+    // Stop the confetti after 5 seconds
+    const timer = setTimeout(() => {
+      setShowConfetti(false);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {showConfetti && <Confetti />}
+      <h1>Hello World</h1>
     </div>
   );
 }
